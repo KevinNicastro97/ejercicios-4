@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Personas</title>
+</head>
+<body>
+    <h1>Lista de Personas</h1>
+    <ul id="lista-personas"></ul>
+
+    <script>
+        fetch('http://localhost:3000/personas')
+            .then(response => response.json())
+            .then(data => {
+                const listaPersonas = document.getElementById('lista-personas');
+                data.forEach(persona => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${persona.nombre} ${persona.apellido}, Edad: ${persona.edad}`;
+                    listaPersonas.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error al obtener datos:', error));
+    </script>
+</body>
+</html>
